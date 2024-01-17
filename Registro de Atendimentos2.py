@@ -17,14 +17,14 @@ class RegistroAtendimentos(Ctk.CTk):
         self.label_titulo = Ctk.CTkLabel(master=self.frame_titulo, text="Registro de Atendimentos", font=("Helvetica", 16, "bold"))
         
         # Contadores 
-        self.contador_suzano1 = 0
-        self.contador_suzano2 = 0
-        self.contador_suzano3 = 0
-        self.contador_suzano4 = 0
-        self.contador_suzano5 = 0
-        self.contador_suzano6 = 0
-        self.contador_suzano7 = 0
-        self.contador_suzano8 = 0
+        self.contador_suzano1 = None
+        self.contador_suzano2 = None
+        self.contador_suzano3 = None
+        self.contador_suzano4 = None
+        self.contador_suzano5 = None
+        self.contador_suzano6 = None
+        self.contador_suzano7 = None
+        self.contador_suzano8 = None
         
         ## Declarar empresa ##
 
@@ -57,24 +57,26 @@ class RegistroAtendimentos(Ctk.CTk):
         self.btn_suzano8 = Ctk.CTkButton(master=self.frame_suzano, text="Outros", command=self.SuzanoContador8)
         self.label_suzano8 = Ctk.CTkLabel(master=self.frame_suzano, text="0")
         
-        #Exportar para Excel
-        self.btn_exportar_excel = Ctk.CTkButton(master=self, text="Exportar para Excel", fg_color="#52BE80",hover=True, hover_color="#229954", command=self.ExportarExcel)
+        # Exportar para Excel
+        self.btn_exportar_excel = Ctk.CTkButton(master=self, text="Exportar para Excel", fg_color="#52BE80", hover=True, hover_color="#229954", command=self.ExportarExcel)
         
-        # #Limpeza de contadores
-        self.btn_limpar = Ctk.CTkButton(master=self, text="Limpar Contadores", fg_color="#E74C3C",hover=True, hover_color="#943126", command=self.confirmar_limpeza_contadores)
+        # Limpeza de contadores
+        self.btn_limpar = Ctk.CTkButton(master=self, text="Limpar Contadores", fg_color="#E74C3C", hover=True, hover_color="#943126", command=self.confirmar_limpeza_contadores)
         
-         ## Posicionamento dos botões ##
+        ## Posicionamento dos botões ##
         
-        #Título
+        # Título
         self.frame_titulo.grid(row=0, column=6, pady=10, padx=10)
         self.label_titulo.grid(row=0, column=6, pady=10, padx=10)
         
-        #Suzano
+        # Suzano
         self.label_suzano.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
         self.frame_suzano.grid(row=4, column=0, pady=10, padx=10)
         
         self.btn_suzano1.grid(row=1, column=1, pady=10, padx=10)
-        self.label_suzano1.grid(row=1, column=2, pady=10, padx=10)
+        self.label_suzano1.grid(row=1, column
+
+=2, pady=10, padx=10)
         
         self.btn_suzano2.grid(row=2, column=1, pady=10, padx=10)
         self.label_suzano2.grid(row=2, column=2, pady=10, padx=10)
@@ -97,13 +99,19 @@ class RegistroAtendimentos(Ctk.CTk):
         self.btn_suzano8.grid(row=8, column=1, pady=10, padx=10)
         self.label_suzano8.grid(row=8, column=2, pady=10, padx=10)
         
-        #Exportar para Excel
+        # Exportar para Excel
         self.btn_exportar_excel.grid(row=10, column=6, pady=10, padx=10)
         
-        #Limpeza de contadores
+        # Limpeza de contadores
         self.btn_limpar.grid(row=10, column=7, pady=10, padx=10)
         
-        #Funções
+        # Carregar contagens da última sessão (se existirem)
+        self.carregar_ultima_sessao()
+        
+        # Configurar evento de fechamento da janela
+        self.protocol("WM_DELETE_WINDOW", self.fechar_janela)
+        
+    # Funções
     def SuzanoContador1(self):
         self.contador_suzano1 += 1
         self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
@@ -136,18 +144,21 @@ class RegistroAtendimentos(Ctk.CTk):
         self.contador_suzano8 += 1
         self.atualizar_rotulo(self.label_suzano8, self.contador_suzano8)
     
+    def atualizar_rotulo(self, rotulo, contador):
+        rotulo.configure(text=f"{contador}")
+    
     def ExportarExcel(self):
-        #Cria planilha
+        # Cria planilha
         workbook = Workbook()
         
-        #Adicionar folha
+        # Adicionar folha
         sheet = workbook.active
         
-        #Cabeçalhos Empresas
+        # Cabeçalhos Empresas
         sheet['A1'] = "Empresa"
         sheet['A2'] = "Suzano"
         
-        #Cabeçalhos Atividades
+        # Cabeçalhos Atividades
         sheet['B1'] = "Cadastro Omnilink"
         sheet['C1'] = "Verificar Espelhamento"
         sheet['D1'] = "Trocar Rastreador"
@@ -157,7 +168,7 @@ class RegistroAtendimentos(Ctk.CTk):
         sheet['H1'] = "Dúvidas"
         sheet['I1'] = "Outros"
         
-        #Contadores
+        # Contadores
         sheet['B2'] = self.contador_suzano1
         sheet['C2'] = self.contador_suzano2
         sheet['D2'] = self.contador_suzano3
@@ -167,7 +178,7 @@ class RegistroAtendimentos(Ctk.CTk):
         sheet['H2'] = self.contador_suzano7
         sheet['I2'] = self.contador_suzano8
         
-        #Salvar planilha
+        # Salvar planilha
         arquivo_excel = "contagem_atendimentos.xlsx"
         workbook.save(arquivo_excel)
         messagebox.showinfo("Exportar para Excel", f"Registro de Atendimentos salvo em {arquivo_excel} com sucesso!")
@@ -177,9 +188,6 @@ class RegistroAtendimentos(Ctk.CTk):
         if resposta == 'yes':
             self.LimparContadores()
             
-    def atualizar_rotulo(self, rotulo, contador):
-        rotulo.configure(text=f"{contador}")
-    
     def LimparContadores(self):
         self.contador_suzano1 = 0
         self.contador_suzano2 = 0
@@ -191,25 +199,77 @@ class RegistroAtendimentos(Ctk.CTk):
         self.contador_suzano8 = 0
         
         self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
-        
         self.atualizar_rotulo(self.label_suzano2, self.contador_suzano2)
-        
         self.atualizar_rotulo(self.label_suzano3, self.contador_suzano3)
-        
         self.atualizar_rotulo(self.label_suzano4, self.contador_suzano4)
-        
         self.atualizar_rotulo(self.label_suzano5, self.contador_suzano5)
-        
         self.atualizar_rotulo(self.label_suzano6, self.contador_suzano6)
-        
         self.atualizar_rotulo(self.label_suzano7, self.contador_suzano7)
-        
         self.atualizar_rotulo(self.label_suzano8, self.contador_suzano8)
-                  
+        
+        
+    def salvar_ultima_sessao(self):
+        with open("ultima_sessao.txt", "w") as arquivo:
+            arquivo.write(f"Suzano Cadastro_Omnilink: {self.contador_suzano1}\n")
+            arquivo.write(f"Suzano Verificar_Espelhamento: {self.contador_suzano2}\n")
+            arquivo.write(f"Suzano Trocar_Rastreador: {self.contador_suzano3}\n")
+            arquivo.write(f"Suzano Voltar_PNA: {self.contador_suzano4}\n")
+            arquivo.write(f"Suzano Treinamento: {self.contador_suzano5}\n")
+            arquivo.write(f"Suzano Cadastro: {self.contador_suzano6}\n")
+            arquivo.write(f"Suzano Dúvidas: {self.contador_suzano7}\n")
+            arquivo.write(f"Suzano Outros: {self.contador_suzano8}\n")
+
+    def carregar_ultima_sessao(self):
+        try:
+            # Carregar contagens de um arquivo de texto
+            with open('ultima_sessao.txt', 'r') as file:
+                for linha in file:
+                    valores = linha.strip().split()
+                    if len(valores) == 3:
+                        empresa, atividade, contador = linha.strip().split()
+                        if empresa == "Suzano":
+                            if atividade == "Cadastro_Omnilink:":
+                                self.contador_suzano1 = int(contador)
+                            elif atividade == "Verificar_Espelhamento:":
+                                self.contador_suzano2 = int(contador)
+                            elif atividade == "Trocar_Rastreador:":
+                                self.contador_suzano3 = int(contador)
+                            elif atividade == "Voltar_PNA:":
+                                self.contador_suzano4 = int(contador)
+                            elif atividade == "Treinamento:":
+                                self.contador_suzano5 = int(contador)
+                            elif atividade == "Cadastro:":
+                                self.contador_suzano6 = int(contador)
+                            elif atividade == "Dúvidas:":
+                                self.contador_suzano7 = int(contador)
+                            elif atividade == "Outros:":
+                                self.contador_suzano8 = int(contador)
+            # Update labels with loaded values
+            self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
+            self.atualizar_rotulo(self.label_suzano2, self.contador_suzano2)
+            self.atualizar_rotulo(self.label_suzano3, self.contador_suzano3)
+            self.atualizar_rotulo(self.label_suzano4, self.contador_suzano4)
+            self.atualizar_rotulo(self.label_suzano5, self.contador_suzano5)
+            self.atualizar_rotulo(self.label_suzano6, self.contador_suzano6)
+            self.atualizar_rotulo(self.label_suzano7, self.contador_suzano7)
+            self.atualizar_rotulo(self.label_suzano8, self.contador_suzano8)
+
+        except FileNotFoundError:
+            # If the file doesn't exist, initialize counters to 0
+            self.contador_suzano1 = 0
+            self.contador_suzano2 = 0
+            self.contador_suzano3 = 0
+            self.contador_suzano4 = 0
+            self.contador_suzano5 = 0
+            self.contador_suzano6 = 0
+            self.contador_suzano7 = 0
+            self.contador_suzano8 = 0
+    
+    def fechar_janela(self):
+        self.salvar_ultima_sessao()
+        self.destroy()
+    
+    
 if __name__ == '__main__':
     app = RegistroAtendimentos()
     app.mainloop()
-
-        
-        
-        
