@@ -33,7 +33,15 @@ class RegistroAtendimentos(Ctk.CTk):
         self.contador_adami6 = None
         self.contador_adami7 = None
         self.contador_adami8 = None
-
+        
+        self.contador_klabin1 = None
+        self.contador_klabin2 = None
+        self.contador_klabin3 = None
+        self.contador_klabin4 = None
+        self.contador_klabin5 = None
+        self.contador_klabin6 = None
+        self.contador_klabin7 = None
+        self.contador_klabin8 = None
 
         ## Declarar empresa ##
 
@@ -44,6 +52,10 @@ class RegistroAtendimentos(Ctk.CTk):
         self.frame_adami = Ctk.CTkFrame(self, border_width=2)
 
         self.label_adami = Ctk.CTkLabel(master=self.frame_adami, text=f"Adami", font=("Helvetica", 16, "bold"))
+        
+        self.frame_klabin = Ctk.CTkFrame(self, border_width=2)
+        
+        self.label_klabin = Ctk.CTkLabel(master=self.frame_klabin, text=f"Klabin", font=("Helvetica", 16, "bold"))
 
         ## Declarar botões ##
         self.btn_suzano1 = Ctk.CTkButton(master=self.frame_suzano, text="Cadastro Omnilink", command=self.SuzanoContador1)
@@ -96,6 +108,32 @@ class RegistroAtendimentos(Ctk.CTk):
         self.btn_adami8 = Ctk.CTkButton(master=self.frame_adami, text="Outros", command=self.AdamiContador8)
         self.label_adami8 = Ctk.CTkLabel(master=self.frame_adami, text="0")
         
+        #Klabin
+        self.btn_klabin1 = Ctk.CTkButton(master=self.frame_klabin, text="Cadastro Omnilink", command=self.KlabinContador1)
+        self.label_klabin1 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin2 = Ctk.CTkButton(master=self.frame_klabin, text="Verificar Espelhamento", command=self.KlabinContador2)
+        self.label_klabin2 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin3 = Ctk.CTkButton(master=self.frame_klabin, text="Trocar Rastreador", command=self.KlabinContador3)
+        self.label_klabin3 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin4 = Ctk.CTkButton(master=self.frame_klabin, text="Voltar para PNA", command=self.KlabinContador4)
+        self.label_klabin4 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin5 = Ctk.CTkButton(master=self.frame_klabin, text="Treinamento", command=self.KlabinContador5)
+        self.label_klabin5 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin6 = Ctk.CTkButton(master=self.frame_klabin, text="Cadastro", command=self.KlabinContador6)
+        self.label_klabin6 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin7 = Ctk.CTkButton(master=self.frame_klabin, text="Dúvidas", command=self.KlabinContador7)
+        self.label_klabin7 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        self.btn_klabin8 = Ctk.CTkButton(master=self.frame_klabin, text="Outros", command=self.KlabinContador8)
+        self.label_klabin8 = Ctk.CTkLabel(master=self.frame_klabin, text="0")
+        
+        
         # Exportar para Excel
         self.btn_exportar_excel = Ctk.CTkButton(master=self, text="Exportar para Excel", fg_color="#52BE80", hover=True, hover_color="#229954", command=self.ExportarExcel)
         
@@ -107,15 +145,17 @@ class RegistroAtendimentos(Ctk.CTk):
         # Título
         # self.frame_titulo.grid(row=0, column=6, pady=2, padx=2)
         # self.label_titulo.grid(row=0, column=6, pady=2, padx=2)
-
-        self.label_adami.grid(row=0, column=6, columnspan=2, pady=10, padx=10)
-        self.frame_adami.grid(row=4, column=6, pady=2, padx=2)
-
         
-        # Suzano
-        self.label_suzano.grid(row=0, column=0, columnspan=2, pady=10, padx=10)
-        self.frame_suzano.grid(row=4, column=0, pady=5, padx=5)
+        self.label_suzano.grid(row=0, column=0, columnspan=2, pady=2, padx=2)
+        self.frame_suzano.grid(row=4, column=0, pady=2, padx=2)
         
+        self.label_adami.grid(row=0, column=2, columnspan=2, pady=2, padx=2)
+        self.frame_adami.grid(row=4, column=2, pady=2, padx=2)
+
+        self.label_klabin.grid(row=0, column=4, columnspan=2, pady=2, padx=2)
+        self.frame_klabin.grid(row=4, column=4, pady=2, padx=2)
+        
+        # Suzano 
         self.btn_suzano1.grid(row=1, column=1, pady=10, padx=10)
         self.label_suzano1.grid(row=1, column=2, pady=10, padx=10)
         
@@ -141,35 +181,60 @@ class RegistroAtendimentos(Ctk.CTk):
         self.label_suzano8.grid(row=8, column=2, pady=10, padx=10)
 
         # Adami
-        self.btn_adami1.grid(row=1, column=7, pady=10, padx=10)
-        self.label_adami1.grid(row=1, column=8, pady=10, padx=10)
+        self.btn_adami1.grid(row=1, column=3, pady=10, padx=10)
+        self.label_adami1.grid(row=1, column=4, pady=10, padx=10)
 
-        self.btn_adami2.grid(row=2, column=7, pady=10, padx=10)
-        self.label_adami2.grid(row=2, column=8, pady=10, padx=10)
+        self.btn_adami2.grid(row=2, column=3, pady=10, padx=10)
+        self.label_adami2.grid(row=2, column=4, pady=10, padx=10)
 
-        self.btn_adami3.grid(row=3, column=7, pady=10, padx=10)
-        self.label_adami3.grid(row=3, column=8, pady=10, padx=10)
+        self.btn_adami3.grid(row=3, column=3, pady=10, padx=10)
+        self.label_adami3.grid(row=3, column=4, pady=10, padx=10)
 
-        self.btn_adami4.grid(row=4, column=7, pady=10, padx=10)
-        self.label_adami4.grid(row=4, column=8, pady=10, padx=10)
+        self.btn_adami4.grid(row=4, column=3, pady=10, padx=10)
+        self.label_adami4.grid(row=4, column=4, pady=10, padx=10)
 
-        self.btn_adami5.grid(row=5, column=7, pady=10, padx=10)
-        self.label_adami5.grid(row=5, column=8, pady=10, padx=10)
+        self.btn_adami5.grid(row=5, column=3, pady=10, padx=10)
+        self.label_adami5.grid(row=5, column=4, pady=10, padx=10)
 
-        self.btn_adami6.grid(row=6, column=7, pady=10, padx=10)
-        self.label_adami6.grid(row=6, column=8, pady=10, padx=10)
+        self.btn_adami6.grid(row=6, column=3, pady=10, padx=10)
+        self.label_adami6.grid(row=6, column=4, pady=10, padx=10)
 
-        self.btn_adami7.grid(row=7, column=7, pady=10, padx=10)
-        self.label_adami7.grid(row=7, column=8, pady=10, padx=10)
+        self.btn_adami7.grid(row=7, column=3, pady=10, padx=10)
+        self.label_adami7.grid(row=7, column=4, pady=10, padx=10)
 
-        self.btn_adami8.grid(row=8, column=7, pady=10, padx=10)
-        self.label_adami8.grid(row=8, column=8, pady=10, padx=10)
+        self.btn_adami8.grid(row=8, column=3, pady=10, padx=10)
+        self.label_adami8.grid(row=8, column=4, pady=10, padx=10)
+        
+        # Klabin
+        self.btn_klabin1.grid(row=1, column=5, pady=10, padx=10)
+        self.label_klabin1.grid(row=1, column=6, pady=10, padx=10)
+        
+        self.btn_klabin2.grid(row=2, column=5, pady=10, padx=10)
+        self.label_klabin2.grid(row=2, column=6, pady=10, padx=10)
+        
+        self.btn_klabin3.grid(row=3, column=5, pady=10, padx=10)
+        self.label_klabin3.grid(row=3, column=6, pady=10, padx=10)
+        
+        self.btn_klabin4.grid(row=4, column=5, pady=10, padx=10)
+        self.label_klabin4.grid(row=4, column=6, pady=10, padx=10)
+        
+        self.btn_klabin5.grid(row=5, column=5, pady=10, padx=10)
+        self.label_klabin5.grid(row=5, column=6, pady=10, padx=10)
+        
+        self.btn_klabin6.grid(row=6, column=5, pady=10, padx=10)
+        self.label_klabin6.grid(row=6, column=6, pady=10, padx=10)
+        
+        self.btn_klabin7.grid(row=7, column=5, pady=10, padx=10)
+        self.label_klabin7.grid(row=7, column=6, pady=10, padx=10)
+        
+        self.btn_klabin8.grid(row=8, column=5, pady=10, padx=10)
+        self.label_klabin8.grid(row=8, column=6, pady=10, padx=10)
         
         # Exportar para Excel
-        self.btn_exportar_excel.grid(row=10, column=6, pady=10, padx=10)
+        self.btn_exportar_excel.grid(row=20, column=2, pady=5, padx=5)
         
         # Limpeza de contadores
-        self.btn_limpar.grid(row=10, column=7, pady=10, padx=10)
+        self.btn_limpar.grid(row=20, column=4, pady=5, padx=5)
         
         # Carregar contagens da última sessão (se existirem)
         self.carregar_ultima_sessao()
@@ -243,7 +308,40 @@ class RegistroAtendimentos(Ctk.CTk):
     def AdamiContador8(self):
         self.contador_adami8 += 1
         self.atualizar_rotulo(self.label_adami8, self.contador_adami8)
-
+        
+    #Klabin
+    def KlabinContador1(self):
+        self.contador_klabin1 += 1
+        self.atualizar_rotulo(self.label_klabin1, self.contador_klabin1)
+    
+    def KlabinContador2(self):
+        self.contador_klabin2 += 1
+        self.atualizar_rotulo(self.label_klabin2, self.contador_klabin2)
+    
+    def KlabinContador3(self):
+        self.contador_klabin3 += 1
+        self.atualizar_rotulo(self.label_klabin3, self.contador_klabin3)
+    
+    def KlabinContador4(self):
+        self.contador_klabin4 += 1
+        self.atualizar_rotulo(self.label_klabin4, self.contador_klabin4)
+    
+    def KlabinContador5(self):
+        self.contador_klabin5 += 1
+        self.atualizar_rotulo(self.label_klabin5, self.contador_klabin5)
+    
+    def KlabinContador6(self):
+        self.contador_klabin6 += 1
+        self.atualizar_rotulo(self.label_klabin6, self.contador_klabin6)
+    
+    def KlabinContador7(self):
+        self.contador_klabin7 += 1
+        self.atualizar_rotulo(self.label_klabin7, self.contador_klabin7)
+    
+    def KlabinContador8(self):
+        self.contador_klabin8 += 1
+        self.atualizar_rotulo(self.label_klabin8, self.contador_klabin8)
+    
     def atualizar_rotulo(self, rotulo, contador):
         rotulo.configure(text=f"{contador}")
     
@@ -257,6 +355,8 @@ class RegistroAtendimentos(Ctk.CTk):
         # Cabeçalhos Empresas
         sheet['A1'] = "Empresa"
         sheet['A2'] = "Suzano"
+        sheet['A3'] = "Adami"
+        sheet['A4'] = "Klabin"
         
         # Cabeçalhos Atividades
         sheet['B1'] = "Cadastro Omnilink"
@@ -277,6 +377,24 @@ class RegistroAtendimentos(Ctk.CTk):
         sheet['G2'] = self.contador_suzano6
         sheet['H2'] = self.contador_suzano7
         sheet['I2'] = self.contador_suzano8
+        
+        sheet['B3'] = self.contador_adami1
+        sheet['C3'] = self.contador_adami2
+        sheet['D3'] = self.contador_adami3
+        sheet['E3'] = self.contador_adami4
+        sheet['F3'] = self.contador_adami5
+        sheet['G3'] = self.contador_adami6
+        sheet['H3'] = self.contador_adami7
+        sheet['I3'] = self.contador_adami8
+        
+        sheet['B4'] = self.contador_klabin1
+        sheet['C4'] = self.contador_klabin2
+        sheet['D4'] = self.contador_klabin3
+        sheet['E4'] = self.contador_klabin4
+        sheet['F4'] = self.contador_klabin5
+        sheet['G4'] = self.contador_klabin6
+        sheet['H4'] = self.contador_klabin7
+        sheet['I4'] = self.contador_klabin8
         
         # Salvar planilha
         arquivo_excel = "contagem_atendimentos.xlsx"
@@ -307,6 +425,15 @@ class RegistroAtendimentos(Ctk.CTk):
         self.contador_adami7 = 0
         self.contador_adami8 = 0
         
+        self.contador_klabin1 = 0
+        self.contador_klabin2 = 0
+        self.contador_klabin3 = 0
+        self.contador_klabin4 = 0
+        self.contador_klabin5 = 0
+        self.contador_klabin6 = 0
+        self.contador_klabin7 = 0
+        self.contador_klabin8 = 0
+        
         self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
         self.atualizar_rotulo(self.label_suzano2, self.contador_suzano2)
         self.atualizar_rotulo(self.label_suzano3, self.contador_suzano3)
@@ -324,6 +451,15 @@ class RegistroAtendimentos(Ctk.CTk):
         self.atualizar_rotulo(self.label_adami6, self.contador_adami6)
         self.atualizar_rotulo(self.label_adami7, self.contador_adami7)
         self.atualizar_rotulo(self.label_adami8, self.contador_adami8)
+        
+        self.atualizar_rotulo(self.label_klabin1, self.contador_klabin1)
+        self.atualizar_rotulo(self.label_klabin2, self.contador_klabin2)
+        self.atualizar_rotulo(self.label_klabin3, self.contador_klabin3)
+        self.atualizar_rotulo(self.label_klabin4, self.contador_klabin4)
+        self.atualizar_rotulo(self.label_klabin5, self.contador_klabin5)
+        self.atualizar_rotulo(self.label_klabin6, self.contador_klabin6)
+        self.atualizar_rotulo(self.label_klabin7, self.contador_klabin7)
+        self.atualizar_rotulo(self.label_klabin8, self.contador_klabin8)
         
     def salvar_ultima_sessao(self):
         with open("ultima_sessao.txt", "w") as arquivo:
@@ -344,6 +480,15 @@ class RegistroAtendimentos(Ctk.CTk):
             arquivo.write(f"Adami Cadastro: {self.contador_adami6}\n")
             arquivo.write(f"Adami Dúvidas: {self.contador_adami7}\n")
             arquivo.write(f"Adami Outros: {self.contador_adami8}\n")
+            
+            arquivo.write(f"Klabin Cadastro_Omnilink: {self.contador_klabin1}\n")
+            arquivo.write(f"Klabin Verificar_Espelhamento: {self.contador_klabin2}\n")
+            arquivo.write(f"Klabin Trocar_Rastreador: {self.contador_klabin3}\n")
+            arquivo.write(f"Klabin Voltar_PNA: {self.contador_klabin4}\n")
+            arquivo.write(f"Klabin Treinamento: {self.contador_klabin5}\n")
+            arquivo.write(f"Klabin Cadastro: {self.contador_klabin6}\n")
+            arquivo.write(f"Klabin Dúvidas: {self.contador_klabin7}\n")
+            arquivo.write(f"Klabin Outros: {self.contador_klabin8}\n")
 
     def carregar_ultima_sessao(self):
         try:
@@ -387,6 +532,23 @@ class RegistroAtendimentos(Ctk.CTk):
                                 self.contador_adami7 = int(contador) if contador != "None" else None
                             elif atividade == "Outros:":
                                 self.contador_adami8 = int(contador) if contador != "None" else None
+                        elif empresa == "Klabin":
+                            if atividade == "Cadastro_Omnilink:":
+                                self.contador_klabin1 = int(contador) if contador != "None" else None
+                            elif atividade == "Verificar_Espelhamento:":
+                                self.contador_klabin2 = int(contador) if contador != "None" else None
+                            elif atividade == "Trocar_Rastreador:":
+                                self.contador_klabin3 = int(contador) if contador != "None" else None
+                            elif atividade == "Voltar_PNA:":
+                                self.contador_klabin4 = int(contador) if contador != "None" else None
+                            elif atividade == "Treinamento:":
+                                self.contador_klabin5 = int(contador) if contador != "None" else None
+                            elif atividade == "Cadastro:":
+                                self.contador_klabin6 = int(contador) if contador != "None" else None
+                            elif atividade == "Dúvidas:":
+                                self.contador_klabin7 = int(contador) if contador != "None" else None
+                            elif atividade == "Outros:":
+                                self.contador_klabin8 = int(contador) if contador != "None" else None
 
             # Update labels with loaded values
             self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
@@ -406,6 +568,15 @@ class RegistroAtendimentos(Ctk.CTk):
             self.atualizar_rotulo(self.label_adami6, self.contador_adami6)
             self.atualizar_rotulo(self.label_adami7, self.contador_adami7)
             self.atualizar_rotulo(self.label_adami8, self.contador_adami8)
+            
+            self.atualizar_rotulo(self.label_klabin1, self.contador_klabin1)
+            self.atualizar_rotulo(self.label_klabin2, self.contador_klabin2)
+            self.atualizar_rotulo(self.label_klabin3, self.contador_klabin3)
+            self.atualizar_rotulo(self.label_klabin4, self.contador_klabin4)
+            self.atualizar_rotulo(self.label_klabin5, self.contador_klabin5)
+            self.atualizar_rotulo(self.label_klabin6, self.contador_klabin6)
+            self.atualizar_rotulo(self.label_klabin7, self.contador_klabin7)
+            self.atualizar_rotulo(self.label_klabin8, self.contador_klabin8)
 
         except FileNotFoundError:
             # If the file doesn't exist, initialize counters to 0
@@ -426,6 +597,15 @@ class RegistroAtendimentos(Ctk.CTk):
             self.contador_adami6 = None
             self.contador_adami7 = None
             self.contador_adami8 = None
+            
+            self.contador_klabin1 = None
+            self.contador_klabin2 = None
+            self.contador_klabin3 = None
+            self.contador_klabin4 = None
+            self.contador_klabin5 = None
+            self.contador_klabin6 = None
+            self.contador_klabin7 = None
+            self.contador_klabin8 = None
     
     def fechar_janela(self):
         self.salvar_ultima_sessao()
@@ -434,3 +614,4 @@ class RegistroAtendimentos(Ctk.CTk):
 if __name__ == '__main__':
     app = RegistroAtendimentos()
     app.mainloop()
+    
