@@ -1,9 +1,10 @@
 import os
 import customtkinter as Ctk 
+import json
 from customtkinter import *
-import tkinter as tk
 from tkinter import messagebox
 from openpyxl import Workbook
+from datetime import datetime
 
 class RegistroAtendimentos(Ctk.CTk):
     def __init__(self):
@@ -11,7 +12,7 @@ class RegistroAtendimentos(Ctk.CTk):
         self.title('Registro de Atendimentos')
         self.geometry('1000x1000')
         
-        set_default_color_theme('dark-blue')
+        set_default_color_theme('blue')
         
         # self.frame_titulo = Ctk.CTkFrame(self, border_width=2)
         # self.label_titulo = Ctk.CTkLabel(master=self.frame_titulo, text="Registro de Atendimentos", font=("Helvetica", 16, "bold"))
@@ -114,6 +115,9 @@ class RegistroAtendimentos(Ctk.CTk):
 
         self.frame_coopercarga = Ctk.CTkFrame(self, border_width=2)
         self.label_coopercarga = Ctk.CTkLabel(master=self.frame_coopercarga, text=f"Coopercarga", font=("Helvetica", 16, "bold"))
+
+        self.frame_acoes = Ctk.CTkFrame(self, border_width=2)
+
 
         ## Declarar botões ##
         self.btn_suzano1 = Ctk.CTkButton(master=self.frame_suzano, text="Cadastro Omnilink", command=self.SuzanoContador1)
@@ -317,10 +321,10 @@ class RegistroAtendimentos(Ctk.CTk):
         self.label_coopercarga8 = Ctk.CTkLabel(master=self.frame_coopercarga, text="0")
 
         # Exportar para Excel
-        self.btn_exportar_excel = Ctk.CTkButton(master=self, text="Exportar para Excel", fg_color="#52BE80", hover=True, hover_color="#229954", command=self.ExportarExcel)
+        self.btn_exportar_excel = Ctk.CTkButton(master=self.frame_acoes, text="Exportar para Excel", fg_color="#52BE80", hover=True, hover_color="#229954", command=self.ExportarExcel)
         
         # Limpeza de contadores
-        self.btn_limpar = Ctk.CTkButton(master=self, text="Limpar Contadores", fg_color="#E74C3C", hover=True, hover_color="#943126", command=self.confirmar_limpeza_contadores)
+        self.btn_limpar = Ctk.CTkButton(master=self.frame_acoes, text="Limpar Contadores", fg_color="#E74C3C", hover=True, hover_color="#943126", command=self.confirmar_limpeza_contadores)
         
         ## Posicionamento dos botões ##
         #Frames e Labels titulos
@@ -352,6 +356,8 @@ class RegistroAtendimentos(Ctk.CTk):
 
         self.label_coopercarga.grid(row=10, column=6, columnspan=2, pady=2, padx=2)
         self.frame_coopercarga.grid(row=14, column=6, pady=2, padx=2)
+
+        self.frame_acoes.grid(row=20, column=0, columnspan=8, pady=2, padx=2)
         
         # Suzano 
         self.btn_suzano1.grid(row=1, column=1, pady=10, padx=10)
@@ -555,10 +561,10 @@ class RegistroAtendimentos(Ctk.CTk):
 
 
         # Exportar para Excel
-        self.btn_exportar_excel.grid(row=20, column=2, pady=5, padx=5)
+        self.btn_exportar_excel.grid(row=20, column=2, pady=5, padx=10)
         
         # Limpeza de contadores
-        self.btn_limpar.grid(row=20, column=4, pady=5, padx=5)
+        self.btn_limpar.grid(row=20, column=4, pady=5, padx=10)
         
         # Carregar contagens da última sessão (se existirem)
         self.carregar_ultima_sessao()
@@ -831,7 +837,6 @@ class RegistroAtendimentos(Ctk.CTk):
         self.contador_coopercarga8 += 1
         self.atualizar_rotulo(self.label_coopercarga8, self.contador_coopercarga8)    
     
-    
     #Atualizar Rotulo
     def atualizar_rotulo(self, rotulo, contador):
         rotulo.configure(text=f"{contador}")
@@ -1101,6 +1106,106 @@ class RegistroAtendimentos(Ctk.CTk):
         diretorio_script = os.path.dirname(os.path.realpath(__file__))
 
         arquivo_ultima_sessao = os.path.join(diretorio_script, "ultima_sessao.txt")
+
+        data_atual = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+        historico = {
+            "data": data_atual,
+            "suzano": {
+                "cadastro_omnilink": self.contador_suzano1,
+                "verificar_espelhamento": self.contador_suzano2,
+                "trocar_rastreador": self.contador_suzano3,
+                "voltar_pna": self.contador_suzano4,
+                "treinamento": self.contador_suzano5,
+                "cadastro": self.contador_suzano6,
+                "duvidas": self.contador_suzano7,
+                ",outros": self.contador_suzano8
+            },
+            "adami": {
+                "cadastro_omnilink": self.contador_adami1,
+                "verificar_espelhamento": self.contador_adami2,
+                "trocar_rastreador": self.contador_adami3,
+                "voltar_pna": self.contador_adami4,
+                "treinamento": self.contador_adami5,
+                "cadastro": self.contador_adami6,
+                "duvidas": self.contador_adami7,
+                ",outros": self.contador_adami8
+            },
+            "klabin": {
+                "cadastro_omnilink": self.contador_klabin1,
+                "verificar_espelhamento": self.contador_klabin2,
+                "trocar_rastreador": self.contador_klabin3,
+                "voltar_pna": self.contador_klabin4,
+                "treinamento": self.contador_klabin5,
+                "cadastro": self.contador_klabin6,
+                "duvidas": self.contador_klabin7,
+                ",outros": self.contador_klabin8
+            },
+            "irani": {
+                "cadastro_omnilink": self.contador_irani1,
+                "verificar_espelhamento": self.contador_irani2,
+                "trocar_rastreador": self.contador_irani3,
+                "voltar_pna": self.contador_irani4,
+                "treinamento": self.contador_irani5,
+                "cadastro": self.contador_irani6,
+                "duvidas": self.contador_irani7,
+                ",outros": self.contador_irani8
+            },
+            "rfr": {
+                "cadastro_omnilink": self.contador_rfr1,
+                "verificar_espelhamento": self.contador_rfr2,
+                "trocar_rastreador": self.contador_rfr3,
+                "voltar_pna": self.contador_rfr4,
+                "treinamento": self.contador_rfr5,
+                "cadastro": self.contador_rfr6,
+                "duvidas": self.contador_rfr7,
+                ",outros": self.contador_rfr8
+            },
+            "indaiatuba": {
+                "cadastro_omnilink": self.contador_ind1,
+                "verificar_espelhamento": self.contador_ind2,
+                "trocar_rastreador": self.contador_ind3,
+                "voltar_pna": self.contador_ind4,
+                "treinamento": self.contador_ind5,
+                "cadastro": self.contador_ind6,
+                "duvidas": self.contador_ind7,
+                ",outros": self.contador_ind8
+            },
+            "gkn": {
+                "cadastro_omnilink": self.contador_gkn1,
+                "verificar_espelhamento": self.contador_gkn2,
+                "trocar_rastreador": self.contador_gkn3,
+                "voltar_pna": self.contador_gkn4,
+                "treinamento": self.contador_gkn5,
+                "cadastro": self.contador_gkn6,
+                "duvidas": self.contador_gkn7,
+                ",outros": self.contador_gkn8
+            },
+            "coopercarga": {
+                "cadastro_omnilink": self.contador_coopercarga1,
+                "verificar_espelhamento": self.contador_coopercarga2,
+                "trocar_rastreador": self.contador_coopercarga3,
+                "voltar_pna": self.contador_coopercarga4,
+                "treinamento": self.contador_coopercarga5,
+                "cadastro": self.contador_coopercarga6,
+                "duvidas": self.contador_coopercarga7,
+                ",outros": self.contador_coopercarga8
+            }
+        }
+
+        #Ler o histórico existente, se houver
+        try:
+            with open("historico.json", "r") as arquivo:
+                historico_json = json.load(arquivo)
+        except FileNotFoundError:
+            historico_json = []
+        
+        historico_json.append(historico)
+
+        with open("historico.json", "w") as arquivo:
+            json.dump(historico_json, arquivo, indent=4)
+        
+        
         
         with open(arquivo_ultima_sessao, "w") as arquivo:
             arquivo.write(f"Suzano Cadastro_Omnilink: {self.contador_suzano1}\n")
