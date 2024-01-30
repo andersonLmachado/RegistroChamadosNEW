@@ -10,7 +10,7 @@ class RegistroAtendimentos(Ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title('Registro de Atendimentos')
-        self.geometry('1000x1000')
+        self.geometry('900x900')
         
         set_default_color_theme('blue')
         
@@ -1107,105 +1107,108 @@ class RegistroAtendimentos(Ctk.CTk):
 
         arquivo_ultima_sessao = os.path.join(diretorio_script, "ultima_sessao.txt")
 
-        data_atual = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        #Obter o diretório do script
+        caminho_arquivo_json = os.path.join(diretorio_script, "contagem_atendimentos.json")
 
-        historico = {
-            "data": data_atual,
-            "suzano": {
-                "cadastro_omnilink": self.contador_suzano1,
-                "verificar_espelhamento": self.contador_suzano2,
-                "trocar_rastreador": self.contador_suzano3,
-                "voltar_pna": self.contador_suzano4,
-                "treinamento": self.contador_suzano5,
-                "cadastro": self.contador_suzano6,
-                "duvidas": self.contador_suzano7,
-                ",outros": self.contador_suzano8
-            },
-            "adami": {
-                "cadastro_omnilink": self.contador_adami1,
-                "verificar_espelhamento": self.contador_adami2,
-                "trocar_rastreador": self.contador_adami3,
-                "voltar_pna": self.contador_adami4,
-                "treinamento": self.contador_adami5,
-                "cadastro": self.contador_adami6,
-                "duvidas": self.contador_adami7,
-                ",outros": self.contador_adami8
-            },
-            "klabin": {
-                "cadastro_omnilink": self.contador_klabin1,
-                "verificar_espelhamento": self.contador_klabin2,
-                "trocar_rastreador": self.contador_klabin3,
-                "voltar_pna": self.contador_klabin4,
-                "treinamento": self.contador_klabin5,
-                "cadastro": self.contador_klabin6,
-                "duvidas": self.contador_klabin7,
-                ",outros": self.contador_klabin8
-            },
-            "irani": {
-                "cadastro_omnilink": self.contador_irani1,
-                "verificar_espelhamento": self.contador_irani2,
-                "trocar_rastreador": self.contador_irani3,
-                "voltar_pna": self.contador_irani4,
-                "treinamento": self.contador_irani5,
-                "cadastro": self.contador_irani6,
-                "duvidas": self.contador_irani7,
-                ",outros": self.contador_irani8
-            },
-            "rfr": {
-                "cadastro_omnilink": self.contador_rfr1,
-                "verificar_espelhamento": self.contador_rfr2,
-                "trocar_rastreador": self.contador_rfr3,
-                "voltar_pna": self.contador_rfr4,
-                "treinamento": self.contador_rfr5,
-                "cadastro": self.contador_rfr6,
-                "duvidas": self.contador_rfr7,
-                ",outros": self.contador_rfr8
-            },
-            "indaiatuba": {
-                "cadastro_omnilink": self.contador_ind1,
-                "verificar_espelhamento": self.contador_ind2,
-                "trocar_rastreador": self.contador_ind3,
-                "voltar_pna": self.contador_ind4,
-                "treinamento": self.contador_ind5,
-                "cadastro": self.contador_ind6,
-                "duvidas": self.contador_ind7,
-                ",outros": self.contador_ind8
-            },
-            "gkn": {
-                "cadastro_omnilink": self.contador_gkn1,
-                "verificar_espelhamento": self.contador_gkn2,
-                "trocar_rastreador": self.contador_gkn3,
-                "voltar_pna": self.contador_gkn4,
-                "treinamento": self.contador_gkn5,
-                "cadastro": self.contador_gkn6,
-                "duvidas": self.contador_gkn7,
-                ",outros": self.contador_gkn8
-            },
-            "coopercarga": {
-                "cadastro_omnilink": self.contador_coopercarga1,
-                "verificar_espelhamento": self.contador_coopercarga2,
-                "trocar_rastreador": self.contador_coopercarga3,
-                "voltar_pna": self.contador_coopercarga4,
-                "treinamento": self.contador_coopercarga5,
-                "cadastro": self.contador_coopercarga6,
-                "duvidas": self.contador_coopercarga7,
-                ",outros": self.contador_coopercarga8
+        # Carregar histórico existente ou criar uma lista vazia
+        try:
+            with open(caminho_arquivo_json, "r") as arquivo:
+                historico_existente = json.load(arquivo)
+        except (json.JSONDecodeError, FileNotFoundError):
+            historico_existente = []
+
+        # Adicionar novo item ao histórico
+        nova_entrada = {
+            "data_hora": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "contadores": {
+                "suzano":{
+                    "Cadastro_Omnilink": self.contador_suzano1,
+                    "Verificar_Espelhamento": self.contador_suzano2,
+                    "Trocar_Rastreador": self.contador_suzano3,
+                    "Voltar_PNA": self.contador_suzano4,
+                    "Treinamento": self.contador_suzano5,
+                    "Cadastro": self.contador_suzano6,
+                    "Duvidas": self.contador_suzano7,
+                    "Outros": self.contador_suzano8
+                },
+                "adami":{
+                    "Cadastro_Omnilink": self.contador_adami1,
+                    "Verificar_Espelhamento": self.contador_adami2,
+                    "Trocar_Rastreador": self.contador_adami3,
+                    "Voltar_PNA": self.contador_adami4,
+                    "Treinamento": self.contador_adami5,
+                    "Cadastro": self.contador_adami6,
+                    "Duvidas": self.contador_adami7,
+                    "Outros": self.contador_adami8
+                },
+                "klabin":{
+                    "Cadastro_Omnilink": self.contador_klabin1,
+                    "Verificar_Espelhamento": self.contador_klabin2,
+                    "Trocar_Rastreador": self.contador_klabin3,
+                    "Voltar_PNA": self.contador_klabin4,
+                    "Treinamento": self.contador_klabin5,
+                    "Cadastro": self.contador_klabin6,
+                    "Duvidas": self.contador_klabin7,
+                    "Outros": self.contador_klabin8
+                },
+                "irani":{
+                    "Cadastro_Omnilink": self.contador_irani1,
+                    "Verificar_Espelhamento": self.contador_irani2,
+                    "Trocar_Rastreador": self.contador_irani3,
+                    "Voltar_PNA": self.contador_irani4,
+                    "Treinamento": self.contador_irani5,
+                    "Cadastro": self.contador_irani6,
+                    "Duvidas": self.contador_irani7,
+                    "Outros": self.contador_irani8
+                },
+                "rfr":{
+                    "Cadastro_Omnilink": self.contador_rfr1,
+                    "Verificar_Espelhamento": self.contador_rfr2,
+                    "Trocar_Rastreador": self.contador_rfr3,
+                    "Voltar_PNA": self.contador_rfr4,
+                    "Treinamento": self.contador_rfr5,
+                    "Cadastro": self.contador_rfr6,
+                    "Duvidas": self.contador_rfr7,
+                    "Outros": self.contador_rfr8
+                },
+                "indaiatuba":{
+                    "Cadastro_Omnilink": self.contador_ind1,
+                    "Verificar_Espelhamento": self.contador_ind2,
+                    "Trocar_Rastreador": self.contador_ind3,
+                    "Voltar_PNA": self.contador_ind4,
+                    "Treinamento": self.contador_ind5,
+                    "Cadastro": self.contador_ind6,
+                    "Duvidas": self.contador_ind7,
+                    "Outros": self.contador_ind8
+                },
+                "gkn":{
+                    "Cadastro_Omnilink": self.contador_gkn1,
+                    "Verificar_Espelhamento": self.contador_gkn2,
+                    "Trocar_Rastreador": self.contador_gkn3,
+                    "Voltar_PNA": self.contador_gkn4,
+                    "Treinamento": self.contador_gkn5,
+                    "Cadastro": self.contador_gkn6,
+                    "Duvidas": self.contador_gkn7,
+                    "Outros": self.contador_gkn8
+                },
+                "coopercarga":{
+                    "Cadastro_Omnilink": self.contador_coopercarga1,
+                    "Verificar_Espelhamento": self.contador_coopercarga2,
+                    "Trocar_Rastreador": self.contador_coopercarga3,
+                    "Voltar_PNA": self.contador_coopercarga4,
+                    "Treinamento": self.contador_coopercarga5,
+                    "Cadastro": self.contador_coopercarga6,
+                    "Duvidas": self.contador_coopercarga7,
+                    "Outros": self.contador_coopercarga8
+                }
             }
         }
 
-        #Ler o histórico existente, se houver
-        try:
-            with open("historico.json", "r") as arquivo:
-                historico_json = json.load(arquivo)
-        except FileNotFoundError:
-            historico_json = []
-        
-        historico_json.append(historico)
+        historico_existente.append(nova_entrada)
 
-        with open("historico.json", "w") as arquivo:
-            json.dump(historico_json, arquivo, indent=4)
-        
-        
+        #Salvar o historico atualizado no arquivo JSON
+        with open(caminho_arquivo_json, "w") as arquivo:
+            json.dump(historico_existente, arquivo, indent=4)
         
         with open(arquivo_ultima_sessao, "w") as arquivo:
             arquivo.write(f"Suzano Cadastro_Omnilink: {self.contador_suzano1}\n")
