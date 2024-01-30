@@ -10,85 +10,88 @@ class RegistroAtendimentos(Ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title('Registro de Atendimentos')
-        self.geometry('900x900')
+        self.geometry('900x950')
         
         set_default_color_theme('blue')
         
-        # self.frame_titulo = Ctk.CTkFrame(self, border_width=2)
-        # self.label_titulo = Ctk.CTkLabel(master=self.frame_titulo, text="Registro de Atendimentos", font=("Helvetica", 16, "bold"))
+        #Definir o icone para a janela
+        self.iconbitmap('C:/Users/macha/Downloads/RegistroChamadosNEW-main/RegistroChamadosNEW-main/icon.ico')
+
+        self.frame_titulo = Ctk.CTkFrame(self, border_width=2)
+        self.label_titulo = Ctk.CTkLabel(master=self.frame_titulo, text="Registro de Atendimentos", font=("Helvetica", 14, "bold"))
         
         # Contadores 
-        self.contador_suzano1 = None
-        self.contador_suzano2 = None
-        self.contador_suzano3 = None
-        self.contador_suzano4 = None
-        self.contador_suzano5 = None
-        self.contador_suzano6 = None
-        self.contador_suzano7 = None
-        self.contador_suzano8 = None
+        self.contador_suzano1 = 0
+        self.contador_suzano2 = 0
+        self.contador_suzano3 = 0
+        self.contador_suzano4 = 0
+        self.contador_suzano5 = 0
+        self.contador_suzano6 = 0
+        self.contador_suzano7 = 0
+        self.contador_suzano8 = 0
         
-        self.contador_adami1 = None
-        self.contador_adami2 = None
-        self.contador_adami3 = None
-        self.contador_adami4 = None
-        self.contador_adami5 = None
-        self.contador_adami6 = None
-        self.contador_adami7 = None
-        self.contador_adami8 = None
+        self.contador_adami1 = 0
+        self.contador_adami2 = 0
+        self.contador_adami3 = 0
+        self.contador_adami4 = 0
+        self.contador_adami5 = 0
+        self.contador_adami6 = 0
+        self.contador_adami7 = 0
+        self.contador_adami8 = 0
         
-        self.contador_klabin1 = None
-        self.contador_klabin2 = None
-        self.contador_klabin3 = None
-        self.contador_klabin4 = None
-        self.contador_klabin5 = None
-        self.contador_klabin6 = None
-        self.contador_klabin7 = None
-        self.contador_klabin8 = None
+        self.contador_klabin1 = 0
+        self.contador_klabin2 = 0
+        self.contador_klabin3 = 0
+        self.contador_klabin4 = 0
+        self.contador_klabin5 = 0
+        self.contador_klabin6 = 0
+        self.contador_klabin7 = 0
+        self.contador_klabin8 = 0
 
-        self.contador_irani1 = None
-        self.contador_irani2 = None
-        self.contador_irani3 = None
-        self.contador_irani4 = None
-        self.contador_irani5 = None
-        self.contador_irani6 = None
-        self.contador_irani7 = None
-        self.contador_irani8 = None
+        self.contador_irani1 = 0
+        self.contador_irani2 = 0
+        self.contador_irani3 = 0
+        self.contador_irani4 = 0
+        self.contador_irani5 = 0
+        self.contador_irani6 = 0
+        self.contador_irani7 = 0
+        self.contador_irani8 = 0
 
-        self.contador_rfr1 = None
-        self.contador_rfr2 = None
-        self.contador_rfr3 = None
-        self.contador_rfr4 = None
-        self.contador_rfr5 = None
-        self.contador_rfr6 = None
-        self.contador_rfr7 = None
-        self.contador_rfr8 = None
+        self.contador_rfr1 = 0
+        self.contador_rfr2 = 0
+        self.contador_rfr3 = 0
+        self.contador_rfr4 = 0
+        self.contador_rfr5 = 0
+        self.contador_rfr6 = 0
+        self.contador_rfr7 = 0
+        self.contador_rfr8 = 0
 
-        self.contador_ind1 = None
-        self.contador_ind2 = None
-        self.contador_ind3 = None
-        self.contador_ind4 = None
-        self.contador_ind5 = None
-        self.contador_ind6 = None
-        self.contador_ind7 = None
-        self.contador_ind8 = None
+        self.contador_ind1 = 0
+        self.contador_ind2 = 0
+        self.contador_ind3 = 0
+        self.contador_ind4 = 0
+        self.contador_ind5 = 0
+        self.contador_ind6 = 0
+        self.contador_ind7 = 0
+        self.contador_ind8 = 0
 
-        self.contador_gkn1 = None
-        self.contador_gkn2 = None
-        self.contador_gkn3 = None
-        self.contador_gkn4 = None
-        self.contador_gkn5 = None
-        self.contador_gkn6 = None
-        self.contador_gkn7 = None
-        self.contador_gkn8 = None
+        self.contador_gkn1 = 0
+        self.contador_gkn2 = 0
+        self.contador_gkn3 = 0
+        self.contador_gkn4 = 0
+        self.contador_gkn5 = 0
+        self.contador_gkn6 = 0
+        self.contador_gkn7 = 0
+        self.contador_gkn8 = 0
 
-        self.contador_coopercarga1 = None
-        self.contador_coopercarga2 = None
-        self.contador_coopercarga3 = None
-        self.contador_coopercarga4 = None
-        self.contador_coopercarga5 = None
-        self.contador_coopercarga6 = None
-        self.contador_coopercarga7 = None
-        self.contador_coopercarga8 = None
+        self.contador_coopercarga1 = 0
+        self.contador_coopercarga2 = 0
+        self.contador_coopercarga3 = 0
+        self.contador_coopercarga4 = 0
+        self.contador_coopercarga5 = 0
+        self.contador_coopercarga6 = 0
+        self.contador_coopercarga7 = 0
+        self.contador_coopercarga8 = 0
 
         ## Declarar empresa ##
 
@@ -330,8 +333,8 @@ class RegistroAtendimentos(Ctk.CTk):
         #Frames e Labels titulos
 
         # Título
-        # self.frame_titulo.grid(row=0, column=6, pady=2, padx=2)
-        # self.label_titulo.grid(row=0, column=6, pady=2, padx=2)
+        self.frame_titulo.grid(row=0, column=0, pady=5, padx=5)
+        self.label_titulo.grid(row=0, column=0, pady=5, padx=5)
         
         self.label_suzano.grid(row=0, column=0, columnspan=2, pady=2, padx=2)
         self.frame_suzano.grid(row=4, column=0, pady=2, padx=2)
@@ -1283,7 +1286,7 @@ class RegistroAtendimentos(Ctk.CTk):
             arquivo.write(f"Coopercarga Dúvidas: {self.contador_coopercarga7}\n")
             arquivo.write(f"Coopercarga Outros: {self.contador_coopercarga8}\n")
 
-
+    #FIXME: Não está funcionando o .exe. Verificar o que está acontecendo aqui.
     def carregar_ultima_sessao(self):
         
         diretorio_script = os.path.dirname(os.path.realpath(__file__))
