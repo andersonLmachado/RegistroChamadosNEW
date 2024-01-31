@@ -13,9 +13,6 @@ class RegistroAtendimentos(Ctk.CTk):
         self.geometry('900x950')
         
         set_default_color_theme('blue')
-        
-        #Definir o icone para a janela
-        self.iconbitmap('C:/Users/macha/Downloads/RegistroChamadosNEW-main/RegistroChamadosNEW-main/icon.ico')
 
         self.frame_titulo = Ctk.CTkFrame(self, border_width=2)
         self.label_titulo = Ctk.CTkLabel(master=self.frame_titulo, text="Registro de Atendimentos", font=("Helvetica", 14, "bold"))
@@ -561,7 +558,6 @@ class RegistroAtendimentos(Ctk.CTk):
 
         self.btn_coopercarga8.grid(row=18, column=7, pady=10, padx=10)
         self.label_coopercarga8.grid(row=18, column=8, pady=10, padx=10)
-
 
         # Exportar para Excel
         self.btn_exportar_excel.grid(row=20, column=2, pady=5, padx=10)
@@ -1286,7 +1282,6 @@ class RegistroAtendimentos(Ctk.CTk):
             arquivo.write(f"Coopercarga Dúvidas: {self.contador_coopercarga7}\n")
             arquivo.write(f"Coopercarga Outros: {self.contador_coopercarga8}\n")
 
-    #FIXME: Não está funcionando o .exe. Verificar o que está acontecendo aqui.
     def carregar_ultima_sessao(self):
         
         diretorio_script = os.path.dirname(os.path.realpath(__file__))
@@ -1302,140 +1297,140 @@ class RegistroAtendimentos(Ctk.CTk):
                         empresa, atividade, contador = linha.strip().split()
                         if empresa == "Suzano":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_suzano1 = int(contador) if contador != "None" else None
+                                self.contador_suzano1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_suzano2 = int(contador) if contador != "None" else None
+                                self.contador_suzano2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_suzano3 = int(contador) if contador != "None" else None
+                                self.contador_suzano3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_suzano4 = int(contador) if contador != "None" else None
+                                self.contador_suzano4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_suzano5 = int(contador) if contador != "None" else None
+                                self.contador_suzano5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_suzano6 = int(contador) if contador != "None" else None
+                                self.contador_suzano6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_suzano7 = int(contador) if contador != "None" else None
+                                self.contador_suzano7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_suzano8 = int(contador) if contador != "None" else None
+                                self.contador_suzano8 = int(contador) 
                         elif empresa == "Adami":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_adami1 = int(contador) if contador != "None" else None
+                                self.contador_adami1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_adami2 = int(contador) if contador != "None" else None
+                                self.contador_adami2 = int(contador)
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_adami3 = int(contador) if contador != "None" else None
+                                self.contador_adami3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_adami4 = int(contador) if contador != "None" else None
+                                self.contador_adami4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_adami5 = int(contador) if contador != "None" else None
+                                self.contador_adami5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_adami6 = int(contador) if contador != "None" else None
+                                self.contador_adami6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_adami7 = int(contador) if contador != "None" else None
+                                self.contador_adami7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_adami8 = int(contador) if contador != "None" else None
+                                self.contador_adami8 = int(contador) 
                         elif empresa == "Klabin":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_klabin1 = int(contador) if contador != "None" else None
+                                self.contador_klabin1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_klabin2 = int(contador) if contador != "None" else None
+                                self.contador_klabin2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_klabin3 = int(contador) if contador != "None" else None
+                                self.contador_klabin3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_klabin4 = int(contador) if contador != "None" else None
+                                self.contador_klabin4 = int(contador)
                             elif atividade == "Treinamento:":
-                                self.contador_klabin5 = int(contador) if contador != "None" else None
+                                self.contador_klabin5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_klabin6 = int(contador) if contador != "None" else None
+                                self.contador_klabin6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_klabin7 = int(contador) if contador != "None" else None
+                                self.contador_klabin7 = int(contador)
                             elif atividade == "Outros:":
-                                self.contador_klabin8 = int(contador) if contador != "None" else None
+                                self.contador_klabin8 = int(contador) 
                         elif empresa == "Irani":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_irani1 = int(contador) if contador != "None" else None
+                                self.contador_irani1 = int(contador)
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_irani2 = int(contador) if contador != "None" else None
+                                self.contador_irani2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_irani3 = int(contador) if contador != "None" else None
+                                self.contador_irani3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_irani4 = int(contador) if contador != "None" else None
+                                self.contador_irani4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_irani5 = int(contador) if contador != "None" else None
+                                self.contador_irani5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_irani6 = int(contador) if contador != "None" else None
+                                self.contador_irani6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_irani7 = int(contador) if contador != "None" else None
+                                self.contador_irani7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_irani8 = int(contador) if contador != "None" else None
+                                self.contador_irani8 = int(contador) 
                         elif empresa == "RFR":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_rfr1 = int(contador) if contador != "None" else None
+                                self.contador_rfr1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_rfr2 = int(contador) if contador != "None" else None
+                                self.contador_rfr2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_rfr3 = int(contador) if contador != "None" else None
+                                self.contador_rfr3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_rfr4 = int(contador) if contador != "None" else None
+                                self.contador_rfr4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_rfr5 = int(contador) if contador != "None" else None
+                                self.contador_rfr5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_rfr6 = int(contador) if contador != "None" else None
+                                self.contador_rfr6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_rfr7 = int(contador) if contador != "None" else None
+                                self.contador_rfr7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_rfr8 = int(contador) if contador != "None" else None
+                                self.contador_rfr8 = int(contador) 
                         elif empresa == "Indaiatuba":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_ind1 = int(contador) if contador != "None" else None
+                                self.contador_ind1 = int(contador)
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_ind2 = int(contador) if contador != "None" else None
+                                self.contador_ind2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_ind3 = int(contador) if contador != "None" else None
+                                self.contador_ind3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_ind4 = int(contador) if contador != "None" else None
+                                self.contador_ind4 = int(contador)
                             elif atividade == "Treinamento:":
-                                self.contador_ind5 = int(contador) if contador != "None" else None
+                                self.contador_ind5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_ind6 = int(contador) if contador != "None" else None
+                                self.contador_ind6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_ind7 = int(contador) if contador != "None" else None
+                                self.contador_ind7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_ind8 = int(contador) if contador != "None" else None
+                                self.contador_ind8 = int(contador) 
                         elif empresa == "GKN":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_gkn1 = int(contador) if contador != "None" else None
+                                self.contador_gkn1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_gkn2 = int(contador) if contador != "None" else None
+                                self.contador_gkn2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_gkn3 = int(contador) if contador != "None" else None
+                                self.contador_gkn3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_gkn4 = int(contador) if contador != "None" else None
+                                self.contador_gkn4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_gkn5 = int(contador) if contador != "None" else None
+                                self.contador_gkn5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_gkn6 = int(contador) if contador != "None" else None
+                                self.contador_gkn6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_gkn7 = int(contador) if contador != "None" else None
+                                self.contador_gkn7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_gkn8 = int(contador) if contador != "None" else None
+                                self.contador_gkn8 = int(contador) 
                         elif empresa == "Coopercarga":
                             if atividade == "Cadastro_Omnilink:":
-                                self.contador_coopercarga1 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga1 = int(contador) 
                             elif atividade == "Verificar_Espelhamento:":
-                                self.contador_coopercarga2 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga2 = int(contador) 
                             elif atividade == "Trocar_Rastreador:":
-                                self.contador_coopercarga3 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga3 = int(contador) 
                             elif atividade == "Voltar_PNA:":
-                                self.contador_coopercarga4 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga4 = int(contador) 
                             elif atividade == "Treinamento:":
-                                self.contador_coopercarga5 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga5 = int(contador) 
                             elif atividade == "Cadastro:":
-                                self.contador_coopercarga6 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga6 = int(contador) 
                             elif atividade == "Dúvidas:":
-                                self.contador_coopercarga7 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga7 = int(contador) 
                             elif atividade == "Outros:":
-                                self.contador_coopercarga8 = int(contador) if contador != "None" else None
+                                self.contador_coopercarga8 = int(contador) 
                         
             # Update labels with loaded values
             self.atualizar_rotulo(self.label_suzano1, self.contador_suzano1)
@@ -1511,82 +1506,18 @@ class RegistroAtendimentos(Ctk.CTk):
             self.atualizar_rotulo(self.label_coopercarga8, self.contador_coopercarga8)
 
         except FileNotFoundError:
-            # If the file doesn't exist, initialize counters to 0
-            self.contador_suzano1 = None
-            self.contador_suzano2 = None
-            self.contador_suzano3 = None
-            self.contador_suzano4 = None
-            self.contador_suzano5 = None
-            self.contador_suzano6 = None
-            self.contador_suzano7 = None
-            self.contador_suzano8 = None
-
-            self.contador_adami1 = None
-            self.contador_adami2 = None
-            self.contador_adami3 = None
-            self.contador_adami4 = None   
-            self.contador_adami5 = None
-            self.contador_adami6 = None
-            self.contador_adami7 = None
-            self.contador_adami8 = None
-            
-            self.contador_klabin1 = None
-            self.contador_klabin2 = None
-            self.contador_klabin3 = None
-            self.contador_klabin4 = None
-            self.contador_klabin5 = None
-            self.contador_klabin6 = None
-            self.contador_klabin7 = None
-            self.contador_klabin8 = None
-            
-            self.contador_irani1 = None
-            self.contador_irani2 = None
-            self.contador_irani3 = None
-            self.contador_irani4 = None
-            self.contador_irani5 = None
-            self.contador_irani6 = None
-            self.contador_irani7 = None
-            self.contador_irani8 = None
-
-            self.contador_rfr1 = None
-            self.contador_rfr2 = None
-            self.contador_rfr3 = None
-            self.contador_rfr4 = None
-            self.contador_rfr5 = None
-            self.contador_rfr6 = None
-            self.contador_rfr7 = None
-            self.contador_rfr8 = None
-
-            self.contador_ind1 = None
-            self.contador_ind2 = None
-            self.contador_ind3 = None
-            self.contador_ind4 = None
-            self.contador_ind5 = None
-            self.contador_ind6 = None
-            self.contador_ind7 = None
-            self.contador_ind8 = None
-
-            self.contador_gkn1 = None
-            self.contador_gkn2 = None
-            self.contador_gkn3 = None
-            self.contador_gkn4 = None
-            self.contador_gkn5 = None
-            self.contador_gkn6 = None
-            self.contador_gkn7 = None
-            self.contador_gkn8 = None
-
-            self.contador_coopercarga1 = None
-            self.contador_coopercarga2 = None
-            self.contador_coopercarga3 = None
-            self.contador_coopercarga4 = None
-            self.contador_coopercarga5 = None
-            self.contador_coopercarga6 = None
-            self.contador_coopercarga7 = None
-            self.contador_coopercarga8 = None
+            # O arquivo pode não existir na primeira execução
+            pass
     
     def fechar_janela(self):
-        self.salvar_ultima_sessao()
+        #Antes de fechar, salvar a última sessão
+        try:
+            self.salvar_ultima_sessao()
+        except Exception as e:
+            print(f"Erro ao salvar a última sessão: {e}") 
+        #Fechar a janela
         self.destroy()
+        
     
 if __name__ == '__main__':
     app = RegistroAtendimentos()
